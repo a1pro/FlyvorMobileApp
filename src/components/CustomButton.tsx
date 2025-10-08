@@ -74,5 +74,7 @@ const styles = StyleSheet.create({
     borderRadius: verticalScale(35),
     alignItems: "center",
     justifyContent: "center",
+    width:"80%",
+    alignSelf:"center"
   },
 });

@@ -8,6 +8,13 @@ import IMAGES from '../../assets/images';
 type Props = NativeStackScreenProps<RootStackParamList, 'SplashScreen'>;
 
 const SplashScreen: React.FC<Props> = ({ navigation }) => {
+   useEffect(() => {
+    const timer = setTimeout(() => {
+      navigation.navigate('WelcomeScreen');
+    }, 2000);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.viewCon}>

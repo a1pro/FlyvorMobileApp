@@ -3,12 +3,12 @@ export type RootStackParamList = {
   WelcomeScreen: undefined;
   Login: undefined;
   Signup: undefined;
-  Map: undefined;
+  Food: undefined;
   ProfileScreen: undefined;
 };
 
 export type BottomTabParamList = {
-  Map: undefined;
-  AddService: undefined;
+  Food: undefined;
+  Travel: undefined;
   UserProfile: undefined;
 };

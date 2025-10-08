@@ -12,7 +12,8 @@ const COLORS = {
   emailBck: '#FFEBEB',
   grey:"#D3D3D3",
   Green:"#32a842",
-  lightblue:'#73B6F0'
+  lightblue:'#0072FF',
+  red:"#d30d0dff"
 };
 
 export default COLORS;

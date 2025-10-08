@@ -20,10 +20,10 @@ const api = axios.create({
   },
 });
 
-// Request interceptor to add auth token dynamically
+
 api.interceptors.request.use(
   async config => {
-    const token = await getLocalStorageData(STORAGE_KEYS.token); // Fetch token from AsyncStorage
+    const token = await getLocalStorageData(STORAGE_KEYS.token); 
 
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;

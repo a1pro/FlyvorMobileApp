@@ -28,11 +28,13 @@ const BottomNavigator = () => {
           fontFamily: getPlatformFont('regular'),
         },
         tabBarStyle: {
-          backgroundColor: '#0A0A0A',
+          backgroundColor: COLORS.barcolor,
           borderTopWidth: 0,
           shadowRadius: 10,
           paddingTop: 15,
           paddingBottom: 5,
+          borderBottomLeftRadius:40,
+          borderBottomRightRadius:40,
           height: 80,
         },
         tabBarIcon: ({ focused, color }) => {
@@ -81,7 +83,7 @@ const styles = StyleSheet.create({
         width: 25,
       },
       android: {
-        height: (Dimensions.get('window').width * 0.1) / 1.6,
+        height: (Dimensions.get('window').width * 0.1) / 1.3,
         width: (Dimensions.get('window').width * 0.1) / 1,
       },
     }),

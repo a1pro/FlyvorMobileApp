@@ -19,22 +19,23 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
 
   const handleInputChange = (fieldName: string, value: string) => {
     setInputData(prev => ({ ...prev, [fieldName]: value }));
-  };
+  };             
 
   return (
       <SafeAreaView style={styles.container} >
+        <KeyboardAvoidingContainer>
          <LinearGradient
     colors={['#00C6FF', '#0072FF']}
     style={styles.container} 
   >
-  <KeyboardAvoidingContainer>
+  
         <View style={styles.viewCon}>
           <Image source={IMAGES.logo} style={styles.logo} />
 
           <CustomText type="heading" fontWeight="900" color={COLORS.White} style={{paddingHorizontal:horizontalScale(20)}}>
             Welcome
           </CustomText>
-
+                        
           <CustomText
             type="subTitle"
             fontWeight="300"
@@ -87,8 +88,9 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
        </TouchableOpacity>
           </View>
         </View>
-       </KeyboardAvoidingContainer>
+      
       </LinearGradient>
+       </KeyboardAvoidingContainer>
        </SafeAreaView>
     
   );

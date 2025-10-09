@@ -28,10 +28,10 @@ export function CustomText({
   onPress,
   ...rest
 }: CustomTextProps) {
-  // Function to calculate dynamic lineHeight based on fontSize
+
   const calculateLineHeight = (fontSize: number) => Math.ceil(fontSize * 1.1);
 
-  // Determine the base style for the given type
+
   const getTypeStyle = (): TextStyle => {
     const fontSizeMap: Record<string, number> = {
       heading: styles.heading.fontSize,

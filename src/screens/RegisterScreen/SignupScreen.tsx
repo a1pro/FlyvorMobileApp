@@ -21,9 +21,11 @@ const SignupScreen: React.FC<Props> = ({ navigation }) => {
     };
 
     return (
+          <SafeAreaView style={styles.container}>
+            <KeyboardAvoidingContainer>
         <LinearGradient colors={['#00C6FF', '#0072FF']}
             style={styles.container} >
-            <SafeAreaView style={styles.container}>
+          
                 <ScrollView contentContainerStyle={{ paddingBottom: 30 }}>
                     <View style={styles.viewCon}>
                         <Image source={IMAGES.logo} style={styles.logo} />
@@ -78,8 +80,10 @@ const SignupScreen: React.FC<Props> = ({ navigation }) => {
                         </View>
                     </View>
                 </ScrollView>
+                 </LinearGradient>
+                 </KeyboardAvoidingContainer>
             </SafeAreaView>
-        </LinearGradient>
+       
     )
 }
 export default SignupScreen

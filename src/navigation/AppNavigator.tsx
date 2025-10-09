@@ -9,6 +9,7 @@ import WelcomeScreen from '../screens/WelcomeScreen/WelcomeScreen';
 import LoginScreen from '../screens/LoginScreen/LoginScreen';
 import SignupScreen from '../screens/RegisterScreen/SignupScreen';
 import BottomNavigator from './BottomNavigator';
+import ResturantScreen from '../screens/Resturantlist/ResturantScreen';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -22,6 +23,7 @@ const AppNavigator = () => {
           <Stack.Screen name="Login" component={LoginScreen} />
           <Stack.Screen name='Signup' component={SignupScreen}/>
           <Stack.Screen name="Food" component={BottomNavigator} />
+          <Stack.Screen name='Resturant' component={ResturantScreen}/>
         </Stack.Navigator>
       </SafeAreaProvider>
     </NavigationContainer>

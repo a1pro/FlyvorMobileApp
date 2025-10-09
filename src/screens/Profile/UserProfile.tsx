@@ -1,88 +1,113 @@
 import React, { useState } from 'react';
-import { View, Image, TouchableOpacity, StyleSheet, Text } from 'react-native';
+import { View, Image, TouchableOpacity, StyleSheet, Text, FlatList } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { BottomTabParamList } from '../../types';
 import MaterialIcons from '@react-native-vector-icons/material-icons';
 import styles from './style';
-import CustomButton from '../../components/CustomButton';
+import IMAGES from '../../assets/images';
 import COLORS from '../../utils/Colors';
 import { CustomText } from '../../components/CustomText';
 import { verticalScale } from '../../utils/Metrics';
-import IMAGES from '../../assets/images';
+import Fontisto from '@react-native-vector-icons/fontisto';
 
-type Props = NativeStackScreenProps<BottomTabParamList, 'UserProfile'>;
+const tabs = [
+  { id: 1, title: 'My Reviews' },
+  { id: 2, title: 'Friends' },
+  { id: 3, title: 'Settings' },
+];
 
-const UserProfile: React.FC<Props> = ({ navigation }) => {
-  const [phone, setPhone] = useState('1234567890');
-  const [address, setAddress] = useState(
-    '221B Baker Street\nLondon, NW1 6XE\nUnited Kingdom',
-  );
+const cards = [
+  { id: 1, icon: 'restaurant-menu', label: 'The Italian Bistro', subLabel: 'Restaurant' },
+  { id: 2, icon: 'hotel', label: 'Grand Hotel', subLabel: 'Hotel' },
+  { id: 3, icon: 'location-city', label: 'City Tour', subLabel: 'experience' },
+];
+
+const UserProfile = () => {
+  const [activeTab, setActiveTab] = useState(1);
   const user = {
     name: 'Jhon Doe',
-    role: 'Entrepreneur',
-    desc: 'A professional vehicle enthusiast and car collector',
+    email: 'John Doe@example.com',
     avatar: IMAGES.profile,
   };
 
+  const renderTab =  ({ item }: { item: { id: number; title: string } }) => (
+    <TouchableOpacity
+      style={[
+        styles.profileTab,
+        activeTab === item.id && { backgroundColor: COLORS.lightblue }
+      ]}
+      onPress={() => setActiveTab(item.id)}
+    >
+      <Text style={[
+        styles.tabText,
+        activeTab === item.id && { color: COLORS.White }
+      ]}>{item.title}</Text>
+    </TouchableOpacity>
+  );
+
+  const renderCard = ({ item }) => (
+    <View style={styles.listCard}>
+      <View style={styles.cardLeft}>
+        <MaterialIcons name={item.icon} size={25} color={COLORS.lightblue} />
+      </View>
+      <View style={{ flex: 1 }}>
+        <Text style={styles.listTitle}>{item.label}</Text>
+        <Text style={styles.listSubtitle}>{item.subLabel}</Text>
+      </View>
+      <TouchableOpacity>
+        <MaterialIcons name="edit" size={22} color={COLORS.lightblue}/>
+      </TouchableOpacity>
+      <TouchableOpacity>
+        <MaterialIcons name="delete-outline" size={22} color={COLORS.red}/>
+      </TouchableOpacity>
+      <TouchableOpacity>
+        <Fontisto name="share-a" size={21} color={COLORS.lightblue}/>
+      </TouchableOpacity>
+    </View>
+  );
+
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.view1}>
-        <TouchableOpacity
-          style={styles.backBtn}
-          onPress={() => navigation.goBack()}
-        >
-          <MaterialIcons name="chevron-left" size={30} color={COLORS.White} />
-        </TouchableOpacity>
-
+      <View style={{ alignItems: 'center', marginTop: verticalScale(16) }}>
         <CustomText
           type="subHeading"
           fontWeight="700"
-          color={COLORS.White}
-          style={{
-            paddingVertical: verticalScale(30),
-          }}
+          color={COLORS.appColor}
+          style={{ marginBottom: verticalScale(10) }}
         >
           Your Profile
         </CustomText>
-      </View>
-
-      <View style={styles.avatarWrapper}>
-        <Image source={user.avatar} style={styles.avatar} />
-        <TouchableOpacity style={styles.editIconWrapper} onPress={() => {}}>
-          <MaterialIcons name="edit" size={20} color={COLORS.White} />
-        </TouchableOpacity>
-      </View>
-      <CustomText style={styles.profileName}>vfhbjdfnj</CustomText>
-      <CustomText style={styles.profileRole}>{user.role}</CustomText>
-      <CustomText style={styles.profileDesc}>{user.desc}</CustomText>
-      <View style={styles.card}>
-        <View style={styles.cardIconWrap}>
-          <MaterialIcons name="phone" size={22} color={COLORS.lightblue} />
+        <View style={styles.avatarWrapper}>
+          <Image source={user.avatar} style={styles.avatar} />
+          <TouchableOpacity style={styles.editIconWrapper}>
+            <MaterialIcons name="edit" size={22} color={COLORS.White} />
+          </TouchableOpacity>
         </View>
-        <Text style={styles.cardText}>{phone}</Text>
+        <CustomText style={styles.profileName}>{user.name}</CustomText>
+        <CustomText style={styles.profileRole}>{user.email}</CustomText>
       </View>
-      <View style={styles.card}>
-        <View style={styles.cardIconWrap}>
-          <MaterialIcons name="location-on" size={22} color={COLORS.lightblue} />
-        </View>
-        <CustomText style={styles.cardText}>{address}</CustomText>
-      </View>
-
-      <TouchableOpacity style={[styles.card, styles.logoutCard]}>
-        <View style={styles.cardIconWrap}>
-          <MaterialIcons name="logout" size={22} color={COLORS.red} />
-        </View>
-        <CustomText style={styles.logoutText}>Log out</CustomText>
-      </TouchableOpacity>
-
-      <View style={styles.btnview}>
-        <CustomButton
-          backgroundColor={COLORS.lightblue}
-          border={true}
-          title="Save"
-          onPress={() => {}}
+      <View style={styles.tabRow}>
+        <FlatList
+          data={tabs}
+          horizontal
+          renderItem={renderTab}
+          keyExtractor={item => item.id.toString()}
+          contentContainerStyle={styles.tabList}
+          showsHorizontalScrollIndicator={false}
         />
+      </View>            
+      
+      <View style={styles.listContainer}>
+        <FlatList
+          data={cards}
+          renderItem={renderCard}
+          keyExtractor={item => item.id.toString()}
+        />
+        <TouchableOpacity style={styles.listCardLogout}>
+          <View style={styles.cardLeft}>
+            <MaterialIcons name="logout" size={24} color={COLORS.lightblue}/>
+          </View>
+          <Text style={styles.listTitle}>Login</Text>
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );

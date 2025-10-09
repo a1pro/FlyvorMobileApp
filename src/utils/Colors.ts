@@ -13,7 +13,9 @@ const COLORS = {
   grey:"#D3D3D3",
   Green:"#32a842",
   lightblue:'#0072FF',
-  red:"#d30d0dff"
+  red:"#d30d0dff",
+  barcolor:"#00C6FF",
+
 };
 
 export default COLORS;

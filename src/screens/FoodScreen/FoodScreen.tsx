@@ -1,5 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { View, Image, TouchableOpacity, TextInput, FlatList, StyleSheet, Text } from 'react-native';
+import React, { useState } from 'react';
+import {
+  View,
+  Image,
+  TouchableOpacity,
+  TextInput,
+  FlatList,
+} from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { BottomTabParamList } from '../../types';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -20,50 +26,50 @@ const data = [
   { id: 4, title: 'Burgers' },
 ];
 
-const foodItem =[
+const foodItem = [
   {
-    id:1,
-    image:IMAGES.pizza,
-    title:'Pizza',
-    rating:4.8,
-    category:'mexican'
-  },
-    {
-    id:2,
-    image:IMAGES.burger,
-    title:'Hamburger',
-    rating:4.3,
-    category:'Veggie Burger'
-  },
-    {
-    id:3,
-    image:IMAGES.taco,
-    title:'Tacos ',
-    rating:4.8,
-    category:'Mexican'
+    id: 1,
+    image: IMAGES.pizza,
+    title: 'Pizza',
+    rating: 4.8,
+    category: 'mexican',
   },
   {
-    id:4,
-    image:IMAGES.pizza,
-    title:'Pizza',
-    rating:4.7,
-    category:'mexican'
+    id: 2,
+    image: IMAGES.burger,
+    title: 'Hamburger',
+    rating: 4.3,
+    category: 'Veggie Burger',
   },
-    {
-    id:5,
-    image:IMAGES.burger,
-    title:'Hamburger',
-    rating:4.9,
-    category:'Veggie Burger'
+  {
+    id: 3,
+    image: IMAGES.taco,
+    title: 'Tacos ',
+    rating: 4.8,
+    category: 'Mexican',
   },
-    {
-    id:6,
-    image:IMAGES.taco,
-    title:'Tacos ',
-    rating:4.6,
-    category:'Mexican'
+  {
+    id: 4,
+    image: IMAGES.pizza,
+    title: 'Pizza',
+    rating: 4.7,
+    category: 'mexican',
   },
-]
+  {
+    id: 5,
+    image: IMAGES.burger,
+    title: 'Hamburger',
+    rating: 4.9,
+    category: 'Veggie Burger',
+  },
+  {
+    id: 6,
+    image: IMAGES.taco,
+    title: 'Tacos ',
+    rating: 4.6,
+    category: 'Mexican',
+  },
+];
 const FoodScreen: React.FC<Props> = ({ navigation }) => {
   const [inputData, setInputData] = useState('');
   const [activeTab, setActiveTab] = useState<number>(1);
@@ -87,16 +93,28 @@ const FoodScreen: React.FC<Props> = ({ navigation }) => {
     </TouchableOpacity>
   );
 
-  const renderItem = ({ item }) => (
+  const renderItem = ({ item }: any) => (
     <View style={styles.cardview}>
       <Image source={item.image} style={styles.cardImage} />
-      <View style={{marginTop: 12, width: '100%'}}>
-        <Text style={styles.titleText}>{item.title}</Text>
-        <Text style={styles.catText}>{item.category}</Text>
-        <View style={{flexDirection:'row',justifyContent:'space-between',alignItems: 'center',marginTop:10, width: '100%'}}>
-          <View style={{flexDirection: 'row', alignItems: 'center'}}>
-            <FontAwesome6 name="star" size={18} color="#F7B801" />
-            <Text style={styles.ratingText}> {item.rating}</Text>
+      <View style={{ marginTop: 12, width: '100%' }}>
+        <CustomText fontWeight="700">{item.title}</CustomText>
+        <CustomText type="small" style={styles.catText}>
+          {item.category}
+        </CustomText>
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            marginTop: 10,
+            width: '100%',
+          }}
+        >
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <FontAwesome6 name="star" size={15} color={COLORS.star} />
+            <CustomText type="small" style={styles.ratingText}>
+              {item.rating}
+            </CustomText>
           </View>
           <TouchableOpacity>
             <FontAwesome6 name="heart" size={22} color={COLORS.appColor} />
@@ -121,11 +139,9 @@ const FoodScreen: React.FC<Props> = ({ navigation }) => {
               onChangeText={tex => setInputData(tex)}
             />
           </View>
-          <View style={styles.icon}>
-            <TouchableOpacity>
-              <Image source={IMAGES.filter} style={{ height: 30, width: 30 }} />
-            </TouchableOpacity>
-          </View>
+          <TouchableOpacity style={styles.icon}>
+            <Image source={IMAGES.filter} style={{ height: 20, width: 20 }} />
+          </TouchableOpacity>
         </View>
         <View>
           <CustomText type="title" fontWeight="600" style={styles.txt}>
@@ -140,32 +156,32 @@ const FoodScreen: React.FC<Props> = ({ navigation }) => {
             showsHorizontalScrollIndicator={false}
           />
         </View>
-        <View >
-          <TouchableOpacity style={styles.globview} onPress={()=>navigation.navigate('Resturant')}>
-          <Text style={styles.globtxt}>Global Search</Text>
-          <Image source={IMAGES.glob} style={{height:30,width:30 ,resizeMode:"contain"}}/>
-          </TouchableOpacity>
 
-        </View>
+        <TouchableOpacity
+          style={styles.globview}
+          onPress={() => navigation.navigate('Resturant')}
+        >
+          <CustomText style={styles.globtxt}>Global Search</CustomText>
+          <Image
+            source={IMAGES.glob}
+            style={{ height: 20, width: 25, resizeMode: 'contain' }}
+          />
+        </TouchableOpacity>
 
-        
-           <CustomText type="title" fontWeight="600" style={styles.txt}>
-            Featured & Trending
-          </CustomText>
+        <CustomText type="title" fontWeight="600" style={styles.txt}>
+          Featured & Trending
+        </CustomText>
 
-          <FlatList
+        <FlatList
           data={foodItem}
           renderItem={renderItem}
           numColumns={2}
           contentContainerStyle={styles.flatListContainer2}
           showsVerticalScrollIndicator={false}
         />
-        
       </View>
     </SafeAreaView>
   );
 };
-
-
 
 export default FoodScreen;

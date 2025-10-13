@@ -26,20 +26,21 @@ export function KeyboardAvoidingContainer({
   const Content = scrollEnabled ? ScrollView : View;
   return (
     <KeyboardAvoidingView
-    
-    style={[
+      style={[
         styles.container,
         {
           backgroundColor,
         },
       ]}
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+    >
       <Content
         contentContainerStyle={[
           scrollEnabled ? styles.scrollContent : styles.content,
           style,
         ]}
-        keyboardShouldPersistTaps="never">
+        keyboardShouldPersistTaps="never"
+      >
         {children}
       </Content>
     </KeyboardAvoidingView>

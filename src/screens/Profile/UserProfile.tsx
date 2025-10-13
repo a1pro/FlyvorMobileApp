@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Image, TouchableOpacity, StyleSheet, Text, FlatList } from 'react-native';
+import { View, Image, TouchableOpacity, FlatList } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import MaterialIcons from '@react-native-vector-icons/material-icons';
 import styles from './style';
@@ -8,7 +8,9 @@ import COLORS from '../../utils/Colors';
 import { CustomText } from '../../components/CustomText';
 import { verticalScale } from '../../utils/Metrics';
 import Fontisto from '@react-native-vector-icons/fontisto';
-
+import FontAwesome from '@react-native-vector-icons/fontawesome';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { BottomTabParamList } from '../../types';
 const tabs = [
   { id: 1, title: 'My Reviews' },
   { id: 2, title: 'Friends' },
@@ -16,12 +18,17 @@ const tabs = [
 ];
 
 const cards = [
-  { id: 1, icon: 'restaurant-menu', label: 'The Italian Bistro', subLabel: 'Restaurant' },
+  {
+    id: 1,
+    icon: 'restaurant-menu',
+    label: 'The Italian Bistro',
+    subLabel: 'Restaurant',
+  },
   { id: 2, icon: 'hotel', label: 'Grand Hotel', subLabel: 'Hotel' },
   { id: 3, icon: 'location-city', label: 'City Tour', subLabel: 'experience' },
 ];
-
-const UserProfile = () => {
+type Props = NativeStackScreenProps<BottomTabParamList, 'Profile'>;
+const UserProfile: React.FC<Props> = ({ navigation }) => {
   const [activeTab, setActiveTab] = useState(1);
   const user = {
     name: 'Jhon Doe',
@@ -29,38 +36,46 @@ const UserProfile = () => {
     avatar: IMAGES.profile,
   };
 
-  const renderTab =  ({ item }: { item: { id: number; title: string } }) => (
+  const renderTab = ({ item }: { item: { id: number; title: string } }) => (
     <TouchableOpacity
       style={[
         styles.profileTab,
-        activeTab === item.id && { backgroundColor: COLORS.lightblue }
+        activeTab === item.id && { backgroundColor: COLORS.barcolor },
       ]}
       onPress={() => setActiveTab(item.id)}
     >
-      <Text style={[
-        styles.tabText,
-        activeTab === item.id && { color: COLORS.White }
-      ]}>{item.title}</Text>
+      <CustomText
+        fontFamily="semiBold"
+        style={[
+          styles.tabText,
+          activeTab === item.id && { color: COLORS.White },
+        ]}
+      >
+        {item.title}
+      </CustomText>
     </TouchableOpacity>
   );
 
-  const renderCard = ({ item }) => (
+  const renderCard = ({ item }: any) => (
     <View style={styles.listCard}>
-      <View style={styles.cardLeft}>
-        <MaterialIcons name={item.icon} size={25} color={COLORS.lightblue} />
-      </View>
+      <MaterialIcons name={item.icon} size={25} color={COLORS.buttonTxt} />
+
       <View style={{ flex: 1 }}>
-        <Text style={styles.listTitle}>{item.label}</Text>
-        <Text style={styles.listSubtitle}>{item.subLabel}</Text>
+        <CustomText style={styles.listTitle} color={COLORS.black}>
+          {item.label}
+        </CustomText>
+        <CustomText type="small" color={COLORS.buttonTxt}>
+          {item.subLabel}
+        </CustomText>
       </View>
       <TouchableOpacity>
-        <MaterialIcons name="edit" size={22} color={COLORS.lightblue}/>
+        <FontAwesome name="edit" size={20} color={COLORS.lightblue} />
       </TouchableOpacity>
       <TouchableOpacity>
-        <MaterialIcons name="delete-outline" size={22} color={COLORS.red}/>
+        <MaterialIcons name="delete" size={20} color={COLORS.red} />
       </TouchableOpacity>
       <TouchableOpacity>
-        <Fontisto name="share-a" size={21} color={COLORS.lightblue}/>
+        <Fontisto name="share-a" size={18} color={COLORS.lightblue} />
       </TouchableOpacity>
     </View>
   );
@@ -79,14 +94,21 @@ const UserProfile = () => {
         <View style={styles.avatarWrapper}>
           <Image source={user.avatar} style={styles.avatar} />
           <TouchableOpacity style={styles.editIconWrapper}>
-            <MaterialIcons name="edit" size={22} color={COLORS.White} />
+            <MaterialIcons name="edit" size={15} color={COLORS.White} />
           </TouchableOpacity>
         </View>
-        <CustomText style={styles.profileName}>{user.name}</CustomText>
+        <CustomText
+          type="subHeading"
+          fontWeight={'bold'}
+          style={styles.profileName}
+        >
+          {user.name}
+        </CustomText>
         <CustomText style={styles.profileRole}>{user.email}</CustomText>
       </View>
       <View style={styles.tabRow}>
         <FlatList
+          scrollEnabled={false}
           data={tabs}
           horizontal
           renderItem={renderTab}
@@ -94,19 +116,19 @@ const UserProfile = () => {
           contentContainerStyle={styles.tabList}
           showsHorizontalScrollIndicator={false}
         />
-      </View>            
-      
+      </View>
+
       <View style={styles.listContainer}>
         <FlatList
+          scrollEnabled={false}
           data={cards}
           renderItem={renderCard}
           keyExtractor={item => item.id.toString()}
         />
-        <TouchableOpacity style={styles.listCardLogout}>
-          <View style={styles.cardLeft}>
-            <MaterialIcons name="logout" size={24} color={COLORS.lightblue}/>
-          </View>
-          <Text style={styles.listTitle}>Login</Text>
+
+        <TouchableOpacity style={styles.listCard}>
+          <MaterialIcons name="logout" size={24} color={COLORS.lightblue} />
+          <CustomText style={styles.listTitle}>Login</CustomText>
         </TouchableOpacity>
       </View>
     </SafeAreaView>

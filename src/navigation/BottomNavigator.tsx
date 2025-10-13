@@ -33,8 +33,6 @@ const BottomNavigator = () => {
           shadowRadius: 10,
           paddingTop: 15,
           paddingBottom: 5,
-          borderBottomLeftRadius:40,
-          borderBottomRightRadius:40,
           height: 80,
         },
         tabBarIcon: ({ focused, color }) => {
@@ -42,8 +40,8 @@ const BottomNavigator = () => {
           if (route.name === 'Food') {
             iconName = IMAGES.food;
           } else if (route.name === 'Travel') {
-            iconName = IMAGES.travel
-          } else if (route.name === 'UserProfile') {
+            iconName = IMAGES.travel;
+          } else if (route.name === 'Profile') {
             iconName = IMAGES.user;
           }
           return (
@@ -65,7 +63,7 @@ const BottomNavigator = () => {
         options={{ headerShown: false }}
       />
       <Tab.Screen
-        name="UserProfile"
+        name="Profile"
         component={UserProfile}
         options={{ headerShown: false }}
       />
@@ -83,7 +81,7 @@ const styles = StyleSheet.create({
         width: 25,
       },
       android: {
-        height: (Dimensions.get('window').width * 0.1) / 1.3,
+        height: (Dimensions.get('window').width * 0.1) / 1.5,
         width: (Dimensions.get('window').width * 0.1) / 1,
       },
     }),

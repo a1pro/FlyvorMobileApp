@@ -1,6 +1,6 @@
 const COLORS = {
-  appColor:"#090C11",
-  White:"#FFFFFF",
+  appColor: "#090C11",
+  White: "#FFFFFF",
   btnTxt: '#F3F3F3',
   textColor: '#202020',
   titleColor: '#202020',
@@ -10,11 +10,15 @@ const COLORS = {
   placeholder: '#D2D2D2',
   smsBack: '#E5EBFC',
   emailBck: '#FFEBEB',
-  grey:"#D3D3D3",
-  Green:"#32a842",
-  lightblue:'#0072FF',
-  red:"#d30d0dff",
-  barcolor:"#00C6FF",
+  grey: "#D3D3D3",
+  Green: "#32a842",
+  lightblue: '#0072FF',
+  red: "#d30d0dff",
+  barcolor: "#00C6FF",
+  btnvw: "#F0F5FF",
+  revBtn: "#E6FAFF",
+  buttonTxt: "#6A6A6A",
+  star: "#F7B801"
 
 };
 

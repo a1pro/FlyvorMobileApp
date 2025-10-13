@@ -1,23 +1,21 @@
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
 import COLORS from '../../utils/Colors';
 import { horizontalScale, verticalScale } from '../../utils/Metrics';
 
 const styles = StyleSheet.create({
-  container: {flex: 1,backgroundColor:COLORS.lightblue,justifyContent:"center"},
-
- 
+  container: { flex: 1, backgroundColor: COLORS.lightblue, justifyContent: "center" },
   logo: {
-    height: verticalScale(200),
-    width:horizontalScale(300),
+    height: verticalScale(150),
+    width: horizontalScale(250),
     resizeMode: 'contain',
     marginBottom: verticalScale(60),
-    alignSelf:"center",
-    tintColor:COLORS.White
-  
+    alignSelf: "center",
+    tintColor: COLORS.White
+
   },
-  viewCon:{flex:1,justifyContent:"center",paddingHorizontal:15},
-  text1:{
-    marginHorizontal:horizontalScale(30),
+  viewCon: { flex: 1, justifyContent: "center", paddingHorizontal: 15 },
+  text1: {
+    marginHorizontal: horizontalScale(30),
   }
 });
 

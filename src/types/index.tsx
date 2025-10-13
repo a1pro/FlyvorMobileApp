@@ -5,11 +5,12 @@ export type RootStackParamList = {
   Signup: undefined;
   Food: undefined;
   ProfileScreen: undefined;
-  Resturant:undefined
+  Resturant: undefined;
 };
 
 export type BottomTabParamList = {
   Food: undefined;
   Travel: undefined;
-  UserProfile: undefined;
+  Profile: undefined;
+  Resturant: undefined;
 };

@@ -28,9 +28,7 @@ export function CustomText({
   onPress,
   ...rest
 }: CustomTextProps) {
-
-  const calculateLineHeight = (fontSize: number) => Math.ceil(fontSize * 1.1);
-
+  const calculateLineHeight = (fontSize: number) => Math.ceil(fontSize * 1.3);
 
   const getTypeStyle = (): TextStyle => {
     const fontSizeMap: Record<string, number> = {
